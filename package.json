@@ -49,6 +49,7 @@
     "test": "mocha -R spec test/*.js"
   },
   "browser": {
-    "./lib/resolve-bindings.js": "./lib/resolve-bindings-web.js"
+    "./lib/resolve-bindings.js": "./lib/resolve-bindings-web.js",
+    "ws": false
   }
 }
