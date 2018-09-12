@@ -1,6 +1,6 @@
 # ![noble](assets/noble-logo.png)
 
-[![Build Status](https://travis-ci.org/sandeepmistry/noble.svg?branch=master)](https://travis-ci.org/sandeepmistry/noble)
+[![Build Status](https://travis-ci.org/noble/noble.svg?branch=master)](https://travis-ci.org/noble/noble)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sandeepmistry/noble?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![OpenCollective](https://opencollective.com/noble/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/noble/sponsors/badge.svg)](#sponsors)
 
@@ -89,9 +89,11 @@ This limit is imposed upon by the Bluetooth adapter hardware as well as it's fir
 
 ### Adapter specific known issues
 
-Some BLE adapters like Sena UD-100 (Cambridge Silicon Radio, Ltd Bluetooth Dongle (HCI mode)) cannot connect to a peripheral while they are scanning. You will get the following message when trying to connect :
+Some BLE adapters cannot connect to a peripheral while they are scanning (examples below). You will get the following messages when trying to connect :
 
-`Error: Command disallowed`
+Sena UD-100 (Cambridge Silicon Radio, Ltd Bluetooth Dongle (HCI mode)) : `Error: Command disallowed`
+
+Intel Dual Band Wireless-AC 7260 (Intel Corporation Wireless 7260 (rev 73)) : `Error: Connection Rejected due to Limited Resources (0xd)`
 
 You need to stop scanning before trying to connect in order to solve this issue.
 
@@ -164,7 +166,7 @@ peripheral.discoverServices(serviceUUIDs[, callback(error, services)]); // parti
 ##### Discover all services and characteristics
 
 ```javascript
-peripheral.discoverAllServicesAndCharacteristics([callback(error, services, characteristics));
+peripheral.discoverAllServicesAndCharacteristics([callback(error, services, characteristics)]);
 ```
 
 ##### Discover some services and characteristics
@@ -389,6 +391,8 @@ characteristic.on('data', callback(data, isNotification));
 
 characteristic.once('read', callback(data, isNotification)); // legacy
 ```
+
+**Note:** `isNotification` event parameter value MAY be `undefined` depending on platform support. The parameter is **deprecated** after version 1.8.1, and not supported when on macOS High Sierra and later.
 
 ##### Write
 
